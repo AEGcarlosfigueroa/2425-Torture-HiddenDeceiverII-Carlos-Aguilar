@@ -19,9 +19,58 @@ function showAllExercises()
 
     buyStones(characters, stones);
 
-    // console.log(stones);
-    // console.log(weapons);
+    console.log("CHARACTER CREATION COMPLETE");
+    console.log(" ");
+    console.log(" ");
     printCharacterAttributes(characters);
+
+    executeCombat(characters);
+}
+
+function executeCombat(characters)
+{
+    console.log("COMBAT START");
+    console.log("-----------------");
+    console.log("BEFORE");
+
+    for(let i=0; i<characters.length;i++)
+    {
+        characters[i].printAttributesCombat();
+    }
+
+    const attackerChoice = Math.floor(Math.random()*characters.length);
+
+    let defenderChoice = -1;
+
+    let notRepeated = false;
+
+    while(!notRepeated)
+    {
+        defenderChoice = Math.floor(Math.random()*characters.length);
+
+        if(defenderChoice !== attackerChoice)
+        {
+            notRepeated = true;
+        }
+    }
+
+    console.log(" ");
+
+    const attacker = characters[attackerChoice];
+
+    const defender = characters[defenderChoice];
+
+    const damage = attacker.attack(defender);
+
+    console.log(attacker.getName() + " attacks " + defender.getName() + " and inflicts " + damage + " points of damage");
+
+    console.log(" ");
+    console.log("AFTER");
+
+    for(let i=0; i<characters.length;i++)
+    {
+        characters[i].printAttributesCombat();
+    }
 }
 
 function printCharacterAttributes(characters)
@@ -167,7 +216,7 @@ function characterFactory(data)
             occupation = Character.PEASANT;
         }
 
-        const character = new Character(target.name,occupation,target.gold);
+        const character = new Character(target.name,occupation,target.gold,target.life);
 
         characters.push(character);
     }
@@ -221,8 +270,6 @@ function weaponFactory(data)
 
 function stoneFactory(data)
 {
-    // console.log(data.length);
-
     let stones = [];
 
     for(let i=0; i<data.length;i++)
@@ -252,8 +299,6 @@ function loadData() {
     const dataWeapons = JSON.parse(jsonWeapons);
 
     const data = [dataCharacters, dataStones, dataWeapons];
-
-    // console.log(data);
 
     return data;
 }    

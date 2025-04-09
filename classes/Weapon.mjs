@@ -20,6 +20,26 @@ export default class Weapon
         this.damageType = damageType;
     }
 
+    getName()
+    {
+        return this.name;
+    }
+
+    getQuality()
+    {
+        return this.quality;
+    }
+
+    setQuality(value)
+    {
+        this.quality = value;
+    }
+
+    getNumDieDamage()
+    {
+        return this.numDieDamage;
+    }
+
     getDamageType()
     {
         return this.damageType;
