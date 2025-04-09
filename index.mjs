@@ -1,5 +1,6 @@
 import {readFileSync} from 'node:fs';
 import PreciousStone from './classes/PreciousStone.mjs';
+import Weapon from './classes/Weapon.mjs';
 
 showAllExercises();
 
@@ -9,7 +10,54 @@ function showAllExercises()
 
     const stones = stoneFactory(jsonData[1]);
 
-    console.log(stones);
+    const weapons = weaponFactory(jsonData[2]);
+
+    // console.log(stones);
+    console.log(weapons);
+}
+
+function weaponFactory(data)
+{
+    let weapons = [];
+
+    for(let i=0; i<data.length;i++)
+    {
+        const target = data[i];
+
+        const name = target.name;
+
+        let damageType;
+
+        if(name.toLowerCase().includes("bow"))
+        {
+            damageType = Weapon.BOW;
+        }
+        else if(name.toLowerCase().includes("sword"))
+        {
+            damageType = Weapon.SWORD;
+        }
+        else
+        {
+            damageType = Weapon.WAND;
+        }
+
+        let type;
+
+        if(target.type === 'common')
+        {
+            type = Weapon.COMMON;
+        }
+        else
+        {
+            type = Weapon.ARCANE;
+        }
+
+        const weapon = new Weapon(name,target.description, target.num_die_damage, type, target.quality, damageType);
+
+        weapons.push(weapon);
+    }
+
+    return weapons;
 }
 
 function stoneFactory(data)
