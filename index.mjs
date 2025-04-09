@@ -17,9 +17,59 @@ function showAllExercises()
 
     assignWeapons(characters, weapons);
 
+    buyStones(characters, stones);
+
     // console.log(stones);
     // console.log(weapons);
     console.log(characters);
+}
+
+function buyStones(characters, stones)
+{
+    for(let i=0; i<characters.length;i++)
+    {
+        const character = characters[i];
+
+        let gold = character.getGold();
+
+        let canBuyStones = true;
+
+        while(canBuyStones)
+        {
+            let validChoices = [];
+
+            for(let j=0;j<stones.length;j++)
+            {
+                const stone = stones[j];
+
+                const value = stone.getValue();
+
+                if(gold > value)
+                {
+                    validChoices.push(j);
+                }
+            }
+
+            if(validChoices.length < 1)
+            {
+                canBuyStones = false;
+            }
+            else
+            {
+                const choice = Math.floor(Math.random()*validChoices.length);
+
+                const chosenStone = stones[validChoices[choice]];
+
+                gold -= chosenStone.getValue();
+
+                const stoneCopy = new PreciousStone(chosenStone.getName(), chosenStone.getDescription(), chosenStone.getValue());
+
+                character.addStone(stoneCopy);
+
+                character.setGold(gold);
+            }
+        }
+    }
 }
 
 function assignWeapons(characters, weapons)
@@ -68,8 +118,6 @@ function assignWeapons(characters, weapons)
                 }
             }
         }
-
-        console.log(validChoices);
 
         const choice = Math.floor(Math.random()*validChoices.length);
 

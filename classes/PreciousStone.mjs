@@ -6,4 +6,19 @@ export default class PreciousStone
         this.description = description;
         this.value = value;
     }
+
+    getName()
+    {
+        return this.name;
+    }
+
+    getDescription()
+    {
+        return this.description;
+    }
+
+    getValue()
+    {
+        return this.value;
+    }
 }

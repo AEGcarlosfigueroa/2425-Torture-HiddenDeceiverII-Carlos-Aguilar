@@ -15,6 +15,21 @@ export default class Character
         this.pouch = [];
     }
 
+    addStone(stone)
+    {
+        this.pouch.push(stone);
+    }
+
+    getGold()
+    {
+        return this.gold;
+    }
+
+    setGold(amount)
+    {
+        this.gold = amount;
+    }
+
     getOccupation()
     {
         return this.occupation;
