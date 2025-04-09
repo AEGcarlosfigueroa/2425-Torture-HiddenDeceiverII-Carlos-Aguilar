@@ -1,6 +1,7 @@
 import {readFileSync} from 'node:fs';
 import PreciousStone from './classes/PreciousStone.mjs';
 import Weapon from './classes/Weapon.mjs';
+import Character from './classes/Character.mjs';
 
 showAllExercises();
 
@@ -12,8 +13,42 @@ function showAllExercises()
 
     const weapons = weaponFactory(jsonData[2]);
 
+    const characters = characterFactory(jsonData[0]);
+
     // console.log(stones);
-    console.log(weapons);
+    // console.log(weapons);
+    console.log(characters);
+}
+
+function characterFactory(data)
+{
+    let characters = [];
+
+    for(let i=0; i<data.length;i++)
+    {
+        const target = data[i];
+
+        let occupation;
+
+        if(target.occupation === "thug")
+        {
+            occupation = Character.THUG;
+        }
+        else if(target.occupation === "priest")
+        {
+            occupation = Character.PRIEST;
+        }
+        else
+        {
+            occupation = Character.PEASANT;
+        }
+
+        const character = new Character(target.name,occupation,target.gold);
+
+        characters.push(character);
+    }
+
+    return characters;
 }
 
 function weaponFactory(data)
