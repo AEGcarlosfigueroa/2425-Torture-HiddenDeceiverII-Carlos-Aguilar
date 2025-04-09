@@ -7,6 +7,11 @@ export default class PreciousStone
         this.value = value;
     }
 
+    printAttributes()
+    {
+        console.log(this.name + ": " + this.value + " coins");
+    }
+
     getName()
     {
         return this.name;

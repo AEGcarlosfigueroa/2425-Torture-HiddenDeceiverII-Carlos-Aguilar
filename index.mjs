@@ -21,7 +21,22 @@ function showAllExercises()
 
     // console.log(stones);
     // console.log(weapons);
-    console.log(characters);
+    printCharacterAttributes(characters);
+}
+
+function printCharacterAttributes(characters)
+{
+    console.log("CHARACTER LIST");
+    console.log("-----------------");
+    console.log(" ");
+
+    for(let i=0; i<characters.length;i++)
+    {
+        characters[i].printAttributes();
+
+        console.log(" ");
+        console.log(" ");
+    }
 }
 
 function buyStones(characters, stones)

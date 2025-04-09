@@ -29,4 +29,24 @@ export default class Weapon
     {
         return this.type;
     }
+
+    printAttributes()
+    {
+        let typeText = " ";
+
+        if(this.type === Weapon.ARCANE)
+        {
+            typeText = "Arcane";
+        }
+        else
+        {
+            typeText = "Common";
+        }
+        
+        console.log("Name: " + this.name);
+        console.log("Description: " + this.description);
+        console.log("Num dies of Damage: " + this.numDieDamage);
+        console.log("Type: " + typeText);
+        console.log("Quality: " + this.quality);
+    }
 }
