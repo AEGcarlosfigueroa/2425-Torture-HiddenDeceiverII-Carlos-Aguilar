@@ -19,4 +19,14 @@ export default class Weapon
         this.quality = quality;
         this.damageType = damageType;
     }
+
+    getDamageType()
+    {
+        return this.damageType;
+    }
+
+    getType()
+    {
+        return this.type;
+    }
 }

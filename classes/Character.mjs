@@ -14,4 +14,14 @@ export default class Character
         this.weapon = {};
         this.pouch = [];
     }
+
+    getOccupation()
+    {
+        return this.occupation;
+    }
+
+    setWeapon(weapon)
+    {
+        this.weapon = weapon;
+    }
 }

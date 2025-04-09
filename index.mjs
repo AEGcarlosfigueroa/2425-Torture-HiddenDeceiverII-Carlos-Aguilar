@@ -15,9 +15,70 @@ function showAllExercises()
 
     const characters = characterFactory(jsonData[0]);
 
+    assignWeapons(characters, weapons);
+
     // console.log(stones);
     // console.log(weapons);
     console.log(characters);
+}
+
+function assignWeapons(characters, weapons)
+{
+    for(let i=0; i<characters.length;i++)
+    {
+        const character = characters[i];
+
+        const occupation = character.getOccupation();
+
+        let validChoices = [];
+
+        if(occupation === Character.PEASANT)
+        {
+            for(let j=0;j<weapons.length;j++)
+            {
+                const weapon = weapons[j];
+
+                if(weapon.getDamageType() === Weapon.WAND && weapon.getType() === Weapon.COMMON)
+                {
+                    validChoices.push(j);
+                }
+            }
+        }
+        else if(occupation === Character.PRIEST)
+        {
+            for(let j=0;j<weapons.length;j++)
+            {
+                const weapon = weapons[j];
+
+                if(weapon.getType() === Weapon.ARCANE)
+                {
+                    validChoices.push(j);
+                }
+            }
+        }
+        else
+        {
+            for(let j=0;j<weapons.length;j++)
+            {
+                const weapon = weapons[j];
+
+                if(weapon.getDamageType() === Weapon.BOW)
+                {
+                    validChoices.push(j);
+                }
+            }
+        }
+
+        console.log(validChoices);
+
+        const choice = Math.floor(Math.random()*validChoices.length);
+
+        const chosenWeapon = weapons[validChoices[choice]];
+
+        character.setWeapon(chosenWeapon);
+
+        weapons.splice(validChoices[choice], 1);
+    }
 }
 
 function characterFactory(data)
@@ -97,7 +158,7 @@ function weaponFactory(data)
 
 function stoneFactory(data)
 {
-    console.log(data.length);
+    // console.log(data.length);
 
     let stones = [];
 
